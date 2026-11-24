@@ -32,7 +32,7 @@ const { parent, scope } = sidebarScope(root, path);
     </script>
   </head>
   <body>
-    <Header current={path.split("/")[0]} />
+    <Header current={path} scope={scope} />
     <div class="mx-auto flex max-w-7xl gap-8 px-4">
       {scope && <Sidebar parent={parent} scope={scope} current={path} />}
       <main class="min-w-0 flex-1 py-8">
