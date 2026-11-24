@@ -10,7 +10,7 @@ An Astro theme for study notes: lectures, exercises, homework series and labs on
 - **No table of contents column.** The article gets the full width.
 - Breadcrumbs, overview tiles, previous and next links inside a tab.
 - KaTeX formulas, Hextra style callouts (`> [!NOTE] Title`), dark mode.
-- Full text search with [Pagefind](https://pagefind.app), built automatically.
+- Full text search with a Hextra style result dropdown, built automatically with [Pagefind](https://pagefind.app).
 
 ## Requirements
 
@@ -130,7 +130,9 @@ Types are `NOTE`, `TIP`, `IMPORTANT`, `WARNING` and `CAUTION`. The title after t
 
 ## Search
 
-`astro build` creates the Pagefind index in `dist/pagefind`. The search works in the built site (`astro preview`), not in `astro dev`.
+`astro build` creates the [Pagefind](https://pagefind.app) index in `dist/pagefind`. The header has a Hextra style search: results drop down under the input with the page path, the title and excerpts with highlighted matches. Press `Ctrl K` to focus it, use the arrow keys to move through the results and `Esc` to close. On small screens a search icon opens the input in its own row.
+
+The search works in the built site (`astro preview`), not in `astro dev`.
 
 ## Markdown processor
 

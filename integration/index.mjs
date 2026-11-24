@@ -44,7 +44,7 @@ export default function astrostudium(options = {}) {
       },
       'astro:build:done': async ({ dir }) => {
         const site = fileURLToPath(dir);
-        const { index } = await pagefind.createIndex({});
+        const { index } = await pagefind.createIndex({ excludeSelectors: [".katex"] });
         await index.addDirectory({ path: site });
         await index.writeFiles({ outputPath: `${site}pagefind` });
         await pagefind.close();
