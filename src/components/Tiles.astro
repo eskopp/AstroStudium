@@ -1,0 +1,23 @@
+---
+import type { NavNode } from '../lib/nav';
+
+interface Props {
+  nodes: NavNode[];
+}
+
+const { nodes } = Astro.props;
+---
+
+<ul class="not-prose mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+  {nodes.map((node) => (
+    <li>
+      <a
+        href={node.href}
+        class="block h-full rounded-xl border border-neutral-200 p-4 transition hover:border-accent-500 dark:border-neutral-800"
+      >
+        <span class="font-semibold">{node.title}</span>
+        {node.description && <span class="mt-1 block text-sm text-neutral-500">{node.description}</span>}
+      </a>
+    </li>
+  ))}
+</ul>

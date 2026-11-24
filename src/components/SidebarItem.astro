@@ -1,0 +1,29 @@
+---
+import type { NavNode } from '../lib/nav';
+
+interface Props {
+  node: NavNode;
+  current: string;
+}
+
+const { node, current } = Astro.props;
+const active = node.path === current;
+const open = current === node.path || current.startsWith(`${node.path}/`);
+---
+
+<li class="pl-3">
+  <a
+    href={node.href}
+    class:list={[
+      'block py-1',
+      active ? 'font-medium text-accent-600 dark:text-accent-400' : 'text-neutral-600 hover:text-neutral-950 dark:text-neutral-400 dark:hover:text-white',
+    ]}
+  >
+    {node.title}
+  </a>
+  {node.children.length > 0 && open && (
+    <ul class="space-y-1 border-l border-neutral-200 dark:border-neutral-800">
+      {node.children.map((child) => <Astro.self node={child} current={current} />)}
+    </ul>
+  )}
+</li>

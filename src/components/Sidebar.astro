@@ -1,0 +1,24 @@
+---
+import type { NavNode } from '../lib/nav';
+import SidebarItem from './SidebarItem.astro';
+
+interface Props {
+  parent?: NavNode;
+  scope: NavNode;
+  current: string;
+}
+
+const { parent, scope, current } = Astro.props;
+---
+
+<aside class="sticky top-14 hidden h-[calc(100vh-3.5rem)] w-64 shrink-0 overflow-y-auto py-8 pr-2 md:block">
+  {parent && (
+    <a href={parent.href} class="mb-3 block text-sm text-neutral-500 hover:text-neutral-900 dark:hover:text-white">
+      ← {parent.title}
+    </a>
+  )}
+  <a href={scope.href} class="mb-2 block font-semibold tracking-tight">{scope.title}</a>
+  <ul class="space-y-1 border-l border-neutral-200 text-sm dark:border-neutral-800">
+    {scope.children.map((child) => <SidebarItem node={child} current={current} />)}
+  </ul>
+</aside>
