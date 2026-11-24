@@ -45,7 +45,8 @@
     "./content": {
       "types": "./integration/content.d.ts",
       "default": "./integration/content.mjs"
-    }
+    },
+    "./tiles": "./theme/components/Tiles.astro"
   },
   "files": [
     "integration",

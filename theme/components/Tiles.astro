@@ -1,8 +1,6 @@
 ---
-import type { NavNode } from '../lib/nav';
-
 interface Props {
-  nodes: NavNode[];
+  nodes: { title: string; href: string; description?: string }[];
 }
 
 const { nodes } = Astro.props;

@@ -34,7 +34,7 @@ export default function astrostudium(options = {}) {
     hooks: {
       'astro:config:setup': ({ injectRoute, updateConfig }) => {
         updateConfig({
-          vite: { plugins: [tailwindcss(), virtualConfig(config)] },
+          vite: { plugins: [tailwindcss(), virtualConfig(config)], ssr: { noExternal: ['astrostudium'] } },
           markdown: {
             processor: unified({ remarkPlugins: [remarkMath, remarkCallouts], rehypePlugins: [rehypeKatex] }),
           },
