@@ -10,7 +10,7 @@ const VIRTUAL_ID = 'virtual:astrostudium/config';
 
 const defaults = {
   name: 'AstroStudium',
-  menu: [],
+  menu: null,
   logo: '',
   editUrl: '',
   moduleKinds: ['skript', 'uebung', 'hausaufgaben', 'praktikum'],

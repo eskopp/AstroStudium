@@ -112,7 +112,7 @@ A module without these folders works too. It then shows no tabs, and the sidebar
 | Option | Default | Meaning |
 | --- | --- | --- |
 | `name` | `'AstroStudium'` | Site name in the header and page titles |
-| `menu` | `[]` | Header menu. Items have `label`, optional `href` and optional `children` for a dropdown. If empty, the top level folders become the menu |
+| `menu` | unset | Header menu. Items have `label`, optional `href` and optional `children` for a dropdown. Leave it unset and the top level folders become the menu, use `[]` for no menu entries |
 | `logo` | `''` | Path of a logo image in `public/`, shown left of the name |
 | `editUrl` | `''` | Base URL of the "edit this page" link, for example `https://github.com/me/repo/edit/main/`. The file path is appended |
 | `moduleKinds` | `['skript', 'uebung', 'hausaufgaben', 'praktikum']` | Folder names inside a module that become tabs, in this order |

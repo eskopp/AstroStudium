@@ -8,6 +8,7 @@ export interface MenuItem {
 
 export interface AstroStudiumOptions {
   name?: string;
+  /** Header menu. Leave unset for an automatic menu from the top level folders, use `[]` for no menu. */
   menu?: MenuItem[];
   logo?: string;
   editUrl?: string;
