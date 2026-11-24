@@ -2,9 +2,8 @@
 import { getCollection, render } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import Tiles from '../components/Tiles.astro';
-import ModuleTabs from '../components/ModuleTabs.astro';
 import config from 'virtual:astrostudium/config';
-import { breadcrumbs, findNode, getTree, leaves, moduleTabs } from '../lib/nav';
+import { breadcrumbs, findNode, getTree, leaves, moduleCategories } from '../lib/nav';
 
 export async function getStaticPaths() {
   const entries = await getCollection('docs');
@@ -35,10 +34,12 @@ const node = findNode(root, path)!;
 const crumbs = breadcrumbs(root, path);
 
 const mod = findNode(root, path.split('/').slice(0, 2).join('/'));
-const tabs = mod && path.split('/').length >= 2 ? moduleTabs(mod) : [];
-const kindRoot = tabs.find((t) => path === t.path || path.startsWith(`${t.path}/`));
-const tileNodes = mod && node.path === mod.path ? node.children.filter((c) => !tabs.some((t) => t.path === c.path)) : node.children;
-const pages = kindRoot ? leaves(kindRoot) : mod ? leaves(mod) : [];
+const inModule = !!mod && path.split('/').length >= 2;
+const categories = inModule ? moduleCategories(mod!) : [];
+const category = categories.find((c) => path === c.path || path.startsWith(`${c.path}/`));
+const isModulePage = inModule && node.path === mod!.path && categories.length > 0;
+const looseNodes = isModulePage ? node.children.filter((c) => !categories.some((k) => k.path === c.path)) : node.children;
+const pages = category ? leaves(category) : mod ? leaves(mod) : [];
 const index = pages.findIndex((p) => p.path === path);
 const prev = index > 0 ? pages[index - 1] : undefined;
 const next = index >= 0 ? pages[index + 1] : undefined;
@@ -55,18 +56,22 @@ const next = index >= 0 ? pages[index + 1] : undefined;
     ))}
   </nav>
 
-  {mod && tabs.length > 0 && <ModuleTabs mod={mod} tabs={tabs} current={path} />}
-
   <article data-pagefind-body data-pagefind-meta={`crumbs:${crumbs.slice(0, -1).map((c) => c.title).join(' › ')}`} class="prose prose-neutral max-w-3xl dark:prose-invert">
     <h1>{entry.data.title}</h1>
     {entry.data.description && <p class="lead">{entry.data.description}</p>}
     <Content />
-    {tileNodes.length > 0 && entry.data.tiles && (
+    {looseNodes.length > 0 && entry.data.tiles && (
       <>
         <h2>Inhalt</h2>
-        <Tiles nodes={tileNodes} />
+        <Tiles nodes={looseNodes} />
       </>
     )}
+    {isModulePage && entry.data.tiles && categories.map((c) => (
+      <>
+        <h2><a href={c.href} style="text-decoration: none; color: inherit">{c.title}</a></h2>
+        <Tiles nodes={c.children} />
+      </>
+    ))}
   </article>
 
   {config.editUrl && entry.filePath && (

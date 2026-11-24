@@ -78,24 +78,20 @@ export function breadcrumbs(root: NavNode, path: string): NavNode[] {
   return crumbs;
 }
 
-/** Tabs of a module: its kind folders (Skript, Übung, ...) in configured order. */
-export function moduleTabs(mod: NavNode): NavNode[] {
+/** Categories of a module: its kind folders (Skript, Übung, ...) in configured order. */
+export function moduleCategories(mod: NavNode): NavNode[] {
   return moduleKinds
     .map((kind) => mod.children.find((child) => child.path.split('/').pop() === kind))
     .filter((node): node is NavNode => !!node);
 }
 
-/** Sidebar scope: the active kind folder, else the module (depth 2), else the section (depth 1). */
+/** Sidebar scope: the whole module (depth 2), or the section (depth 1) itself. */
 export function sidebarScope(root: NavNode, path: string): { parent?: NavNode; scope?: NavNode } {
   const segments = path.split('/').filter(Boolean);
   if (segments.length === 0) return {};
   const section = findNode(root, segments[0]);
   if (segments.length === 1) return { scope: section };
-  const mod = findNode(root, segments.slice(0, 2).join('/'));
-  if (segments.length >= 3 && moduleKinds.includes(segments[2])) {
-    return { parent: mod, scope: findNode(root, segments.slice(0, 3).join('/')) };
-  }
-  return { parent: section, scope: mod };
+  return { parent: section, scope: findNode(root, segments.slice(0, 2).join('/')) };
 }
 
 export function leaves(node: NavNode): NavNode[] {

@@ -5,10 +5,10 @@ An Astro theme for study notes: lectures, exercises, homework series and labs on
 ## Features
 
 - **Module-scoped sidebar.** The sidebar only shows the module you are in, so other modules never clutter it.
-- **Module tabs.** A module can have a Skript, Übung, Hausaufgaben and Praktikum part. Each existing part becomes a tab, and the sidebar then shows only the tree of the active tab.
+- **Module categories.** A module can have a Skript, Übung, Hausaufgaben and Praktikum part. The module page lists each existing part as its own category with a heading and its own cards, one below the other.
 - **Configurable header menu** with dropdowns, set in `astro.config.mjs`.
 - **No table of contents column.** The article gets the full width.
-- Breadcrumbs, overview tiles, previous and next links inside a tab.
+- Breadcrumbs, overview tiles, previous and next links inside a category.
 - KaTeX formulas, Hextra style callouts (`> [!NOTE] Title`), dark mode.
 - Full text search with a Hextra style result dropdown, built automatically with [Pagefind](https://pagefind.app).
 
@@ -78,16 +78,16 @@ src/content/docs/
     index.md
     mechanik/                module, the sidebar scope
       index.md
-      skript/                tab "Skript"
+      skript/                category "Skript"
         index.md
         bezugssysteme/
           index.md
           inertialsysteme.md
-      uebung/                tab "Übung"
+      uebung/                category "Übung"
         index.md
         blatt-1.md
-      hausaufgaben/          tab "Hausaufgaben"
-      praktikum/             tab "Praktikum"
+      hausaufgaben/          category "Hausaufgaben"
+      praktikum/             category "Praktikum"
 ```
 
 Frontmatter:
@@ -113,7 +113,7 @@ import Tiles from 'astrostudium/tiles';
 <Tiles nodes={[{ title: 'Physics 1', href: '/physics-1/', description: 'Optional text' }]} />
 ```
 
-A module without these folders works too. It then shows no tabs, and the sidebar lists its pages directly.
+A module without these folders works too. It then shows its pages as plain tiles.
 
 ## Options
 
@@ -123,9 +123,9 @@ A module without these folders works too. It then shows no tabs, and the sidebar
 | `menu` | unset | Header menu. Items have `label`, optional `href` and optional `children` for a dropdown. Leave it unset and the top level folders become the menu, use `[]` for no menu entries |
 | `logo` | `''` | Path of a logo image in `public/`, shown left of the name |
 | `editUrl` | `''` | Base URL of the "edit this page" link, for example `https://github.com/me/repo/edit/main/`. The file path is appended |
-| `moduleKinds` | `['skript', 'uebung', 'hausaufgaben', 'praktikum']` | Folder names inside a module that become tabs, in this order |
+| `moduleKinds` | `['skript', 'uebung', 'hausaufgaben', 'praktikum']` | Folder names inside a module that become categories, in this order |
 
-The tab label is the `title` of the folder's `index.md`.
+The category heading is the `title` of the folder's `index.md`.
 
 ## Callouts
 
