@@ -21,7 +21,7 @@ const formatDate = (date: Date) => date.toLocaleDateString('de-DE', { day: '2-di
         href={node.href}
         class="block h-full rounded-xl border border-neutral-200 p-4 transition hover:border-accent-500 dark:border-neutral-800"
       >
-        <span class="flex items-start justify-between gap-2">
+        <span class="flex flex-wrap items-start justify-between gap-x-2 gap-y-1">
           <span class="font-semibold">{node.title}</span>
           {node.status && (
             <span class:list={['shrink-0 rounded-full px-2 py-0.5 text-xs font-medium', statusClass[node.status]]}>{statusLabel[node.status]}</span>
