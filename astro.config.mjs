@@ -1,14 +1,21 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
-import tailwindcss from '@tailwindcss/vite';
-import remarkMath from 'remark-math';
-import rehypeKatex from 'rehype-katex';
-import remarkCallouts from './plugins/remark-callouts.mjs';
+import astrostudium from './integration/index.mjs';
 
 export default defineConfig({
-  vite: { plugins: [tailwindcss()] },
-  markdown: {
-    remarkPlugins: [remarkMath, remarkCallouts],
-    rehypePlugins: [rehypeKatex],
-  },
+  integrations: [
+    astrostudium({
+      name: 'AstroStudium',
+      menu: [
+        {
+          label: 'Studium',
+          children: [
+            { label: 'Physik', href: '/physik/' },
+            { label: 'Mathematik', href: '/mathematik/' },
+          ],
+        },
+        { label: 'Praktika', href: '/physik/optik/' },
+      ],
+    }),
+  ],
 });

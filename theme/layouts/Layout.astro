@@ -4,6 +4,7 @@ import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Sidebar from '../components/Sidebar.astro';
 import { getTree, sidebarScope } from '../lib/nav';
+import config from 'virtual:astrostudium/config';
 
 interface Props {
   title: string;
@@ -23,7 +24,7 @@ const { parent, scope } = sidebarScope(root, path);
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     {description && <meta name="description" content={description} />}
-    <title>{path ? `${title} | AstroStudium` : 'AstroStudium'}</title>
+    <title>{path ? `${title} | ${config.name}` : config.name}</title>
     <script is:inline>
       const stored = localStorage.getItem('theme');
       const dark = stored ? stored === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;

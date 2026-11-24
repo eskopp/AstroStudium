@@ -1,5 +1,6 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/typography';
+@source '../**/*.astro';
 
 @custom-variant dark (&:where(.dark, .dark *));
 

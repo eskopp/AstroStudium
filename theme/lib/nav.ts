@@ -1,5 +1,7 @@
 import { getCollection } from 'astro:content';
-import { moduleKinds } from '../config/site';
+import config from 'virtual:astrostudium/config';
+
+const moduleKinds = config.moduleKinds;
 
 export type NavNode = {
   title: string;
