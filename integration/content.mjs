@@ -6,4 +6,6 @@ export const docsSchema = z.object({
   weight: z.number().default(100),
   aliases: z.array(z.string()).default([]),
   tiles: z.boolean().default(true),
+  abgabe: z.coerce.date().optional(),
+  status: z.enum(['offen', 'in-arbeit', 'abgegeben']).optional(),
 });

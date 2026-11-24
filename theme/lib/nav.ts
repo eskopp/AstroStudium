@@ -6,6 +6,8 @@ const moduleKinds = config.moduleKinds;
 export type NavNode = {
   title: string;
   description?: string;
+  abgabe?: Date;
+  status?: 'offen' | 'in-arbeit' | 'abgegeben';
   weight: number;
   path: string;
   href: string;
@@ -43,12 +45,14 @@ export async function getTree(): Promise<NavNode> {
     const node = ensure(path);
     node.title = entry.data.title;
     node.description = entry.data.description;
+    node.abgabe = entry.data.abgabe;
+    node.status = entry.data.status;
     node.weight = entry.data.weight;
     node.hasPage = true;
   }
 
   for (const node of nodes.values()) {
-    node.children.sort((a, b) => a.weight - b.weight || a.title.localeCompare(b.title, 'de'));
+    node.children.sort((a, b) => a.weight - b.weight || a.title.localeCompare(b.title, 'de', { numeric: true }));
   }
 
   cached = nodes.get('')!;

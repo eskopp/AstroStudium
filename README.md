@@ -98,6 +98,8 @@ title: Inertial systems       # required
 description: Short summary    # optional, shown on overview tiles
 weight: 1                     # optional, lower comes first, default 100
 tiles: false                  # optional, hide the tiles with the subpages (default true)
+abgabe: 2026-11-22            # optional, due date, shown on the tile as "Abgabe 22.11.2026"
+status: offen                 # optional, offen | in-arbeit | abgegeben, shown as a colored tag on the tile
 aliases:                      # optional, old URLs that redirect to this page
   - /old/path/
 ---
