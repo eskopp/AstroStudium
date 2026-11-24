@@ -37,6 +37,7 @@ const crumbs = breadcrumbs(root, path);
 const mod = findNode(root, path.split('/').slice(0, 2).join('/'));
 const tabs = mod && path.split('/').length >= 2 ? moduleTabs(mod) : [];
 const kindRoot = tabs.find((t) => path === t.path || path.startsWith(`${t.path}/`));
+const tileNodes = mod && node.path === mod.path ? node.children.filter((c) => !tabs.some((t) => t.path === c.path)) : node.children;
 const pages = kindRoot ? leaves(kindRoot) : mod ? leaves(mod) : [];
 const index = pages.findIndex((p) => p.path === path);
 const prev = index > 0 ? pages[index - 1] : undefined;
@@ -60,10 +61,10 @@ const next = index >= 0 ? pages[index + 1] : undefined;
     <h1>{entry.data.title}</h1>
     {entry.data.description && <p class="lead">{entry.data.description}</p>}
     <Content />
-    {node.children.length > 0 && entry.data.tiles && (
+    {tileNodes.length > 0 && entry.data.tiles && (
       <>
         <h2>Inhalt</h2>
-        <Tiles nodes={node.children} />
+        <Tiles nodes={tileNodes} />
       </>
     )}
   </article>
