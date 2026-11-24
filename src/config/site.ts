@@ -4,6 +4,9 @@ export type MenuItem = {
   children?: MenuItem[];
 };
 
+// Folder names inside a module that become tabs, in this order.
+export const moduleKinds = ['skript', 'uebung', 'hausaufgaben', 'praktikum'];
+
 export const site = {
   name: 'AstroStudium',
 };
