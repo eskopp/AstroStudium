@@ -9,6 +9,8 @@ export interface MenuItem {
 export interface AstroStudiumOptions {
   name?: string;
   menu?: MenuItem[];
+  logo?: string;
+  editUrl?: string;
   moduleKinds?: string[];
 }
 

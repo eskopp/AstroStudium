@@ -1,14 +1,21 @@
 ---
+import { getCollection, render } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import Tiles from '../components/Tiles.astro';
 import { getTree } from '../lib/nav';
 import config from 'virtual:astrostudium/config';
 
 const root = await getTree();
+const entry = (await getCollection('docs')).find((e) => e.id === 'index');
+const Content = entry ? (await render(entry)).Content : undefined;
+const title = entry?.data.title ?? config.name;
 ---
 
-<Layout title={config.name}>
-  <h1 class="text-4xl font-bold tracking-tight">{config.name}</h1>
-  <p class="mt-3 text-lg text-neutral-500">Studium, Praktika und Blog an einem Ort.</p>
-  <Tiles nodes={root.children} />
+<Layout title={config.name} description={entry?.data.description}>
+  <article class="prose prose-neutral max-w-3xl dark:prose-invert">
+    <h1>{title}</h1>
+    {entry?.data.description && <p class="lead">{entry.data.description}</p>}
+    {Content ? <Content /> : <p>Studium, Praktika und Blog an einem Ort.</p>}
+    {(entry?.data.tiles ?? true) && <Tiles nodes={root.children} />}
+  </article>
 </Layout>

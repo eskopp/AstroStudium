@@ -97,8 +97,13 @@ Frontmatter:
 title: Inertial systems       # required
 description: Short summary    # optional, shown on overview tiles
 weight: 1                     # optional, lower comes first, default 100
+tiles: false                  # optional, hide the tiles with the subpages (default true)
+aliases:                      # optional, old URLs that redirect to this page
+  - /old/path/
 ---
 ```
+
+An `index.md` directly in `src/content/docs` becomes the start page. Without it, the start page shows the site name and the tiles of all areas.
 
 A module without these folders works too. It then shows no tabs, and the sidebar lists its pages directly.
 
@@ -107,7 +112,9 @@ A module without these folders works too. It then shows no tabs, and the sidebar
 | Option | Default | Meaning |
 | --- | --- | --- |
 | `name` | `'AstroStudium'` | Site name in the header and page titles |
-| `menu` | `[]` | Header menu. Items have `label`, optional `href` and optional `children` for a dropdown |
+| `menu` | `[]` | Header menu. Items have `label`, optional `href` and optional `children` for a dropdown. If empty, the top level folders become the menu |
+| `logo` | `''` | Path of a logo image in `public/`, shown left of the name |
+| `editUrl` | `''` | Base URL of the "edit this page" link, for example `https://github.com/me/repo/edit/main/`. The file path is appended |
 | `moduleKinds` | `['skript', 'uebung', 'hausaufgaben', 'praktikum']` | Folder names inside a module that become tabs, in this order |
 
 The tab label is the `title` of the folder's `index.md`.
