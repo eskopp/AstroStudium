@@ -103,15 +103,13 @@ aliases:                      # optional, old URLs that redirect to this page
 ---
 ```
 
-An `index.md` (or `index.mdx`) directly in `src/content/docs` becomes the start page. In MDX you can show your own cards with the same component the theme uses for the subpages:
+An `index.md` (or `index.mdx`) directly in `src/content/docs` becomes the start page. Without it, the start page shows the site name and the tiles of all areas. In MDX you can show your own cards with the same component the theme uses for the subpages:
 
 ```mdx
 import Tiles from 'astrostudium/tiles';
 
 <Tiles nodes={[{ title: 'Physics 1', href: '/physics-1/', description: 'Optional text' }]} />
 ```
-
- Without it, the start page shows the site name and the tiles of all areas.
 
 A module without these folders works too. It then shows no tabs, and the sidebar lists its pages directly.
 
