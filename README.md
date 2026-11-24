@@ -19,8 +19,10 @@ Astro 7 and Node 22 or newer.
 ## Install
 
 ```bash
-npm install astro github:eskopp/AstroStudium
+npm install --allow-git=all astro github:eskopp/AstroStudium
 ```
+
+npm 11 and newer block Git dependencies by default, so the `--allow-git=all` flag is needed. To make it permanent for a project, add `allow-git=all` to its `.npmrc`. The package is not on the npm registry yet.
 
 ## Setup
 
