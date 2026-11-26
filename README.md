@@ -105,6 +105,29 @@ aliases:                      # optional, old URLs that redirect to this page
 ---
 ```
 
+### Short URLs: modules directly under the root
+
+By default the URL follows the folders (`/physik/mechanik/`). A module can instead live directly under the site root and still belong to an area:
+
+```
+src/content/docs/
+  physik/
+    index.md                 area page, lists its modules
+  mech1/                     module with a short URL: /mech1/
+    index.md
+    skript/
+      index.md
+```
+
+```yaml
+---
+title: Mechanics 1
+bereich: physik               # slug of the area page this module belongs to
+---
+```
+
+The module is then listed on the area page, the breadcrumbs read Start › Physik › Mechanics 1 › ..., and the sidebar shows a link back to the area. Modules without `bereich` keep working as before, both kinds can be mixed. To undo it, move the folder back under the area and remove `bereich`.
+
 An `index.md` (or `index.mdx`) directly in `src/content/docs` becomes the start page. Without it, the start page shows the site name and the tiles of all areas. In MDX you can show your own cards with the same component the theme uses for the subpages:
 
 ```mdx

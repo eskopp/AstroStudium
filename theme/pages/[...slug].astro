@@ -3,7 +3,7 @@ import { getCollection, render } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import Tiles from '../components/Tiles.astro';
 import config from 'virtual:astrostudium/config';
-import { breadcrumbs, findNode, getTree, leaves, moduleCategories } from '../lib/nav';
+import { breadcrumbs, findNode, getTree, leaves, moduleCategories, moduleOf } from '../lib/nav';
 
 export async function getStaticPaths() {
   const entries = await getCollection('docs');
@@ -33,8 +33,8 @@ const root = await getTree();
 const node = findNode(root, path)!;
 const crumbs = breadcrumbs(root, path);
 
-const mod = findNode(root, path.split('/').slice(0, 2).join('/'));
-const inModule = !!mod && path.split('/').length >= 2;
+const mod = moduleOf(root, path);
+const inModule = !!mod;
 const categories = inModule ? moduleCategories(mod!) : [];
 const category = categories.find((c) => path === c.path || path.startsWith(`${c.path}/`));
 const isModulePage = inModule && node.path === mod!.path && categories.length > 0;
