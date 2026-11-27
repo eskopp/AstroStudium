@@ -30,3 +30,17 @@ body { @apply bg-white text-neutral-800 antialiased dark:bg-neutral-950 dark:tex
 .callout-important { @apply border-purple-200 bg-purple-50 dark:border-purple-900 dark:bg-purple-950/60; }
 .callout-warning { @apply border-amber-200 bg-amber-50 dark:border-amber-900 dark:bg-amber-950/60; }
 .callout-caution { @apply border-red-200 bg-red-50 dark:border-red-900 dark:bg-red-950/60; }
+
+@media print {
+  header, aside, .no-print { display: none !important; }
+  body { background: #fff !important; color: #000 !important; }
+  .dark body, html.dark body { background: #fff !important; }
+  main { padding: 0 !important; }
+  .prose { color: #000 !important; max-width: none !important; }
+  .prose :where(h1, h2, h3, h4, strong, a, code) { color: #000 !important; }
+  .prose h2, .prose h3 { break-after: avoid; }
+  .prose img, .prose svg, .callout, .katex-display, pre, table { break-inside: avoid; }
+  .callout { background: #fff !important; border-color: #999 !important; }
+  .applet canvas { max-height: 240px; }
+  a { text-decoration: none; }
+}

@@ -41,6 +41,7 @@ export default function astrostudium(options = {}) {
         });
         injectRoute({ pattern: '/', entrypoint: themeFile('pages/index.astro') });
         injectRoute({ pattern: '/[...slug]', entrypoint: themeFile('pages/[...slug].astro') });
+        injectRoute({ pattern: '/[...slug].md', entrypoint: themeFile('pages/markdown.ts') });
       },
       'astro:build:done': async ({ dir }) => {
         const site = fileURLToPath(dir);
