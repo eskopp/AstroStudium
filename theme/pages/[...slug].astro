@@ -62,6 +62,14 @@ const next = index >= 0 ? pages[index + 1] : undefined;
   </div>
   <script is:inline>
     document.querySelectorAll('[data-print]').forEach((b) => b.addEventListener('click', () => window.print()));
+    let wasDark = false;
+    window.addEventListener('beforeprint', () => {
+      wasDark = document.documentElement.classList.contains('dark');
+      document.documentElement.classList.remove('dark');
+    });
+    window.addEventListener('afterprint', () => {
+      document.documentElement.classList.toggle('dark', wasDark);
+    });
   </script>
 
   <article data-pagefind-body data-pagefind-meta={`crumbs:${crumbs.slice(0, -1).map((c) => c.title).join(' › ')}`} class="prose prose-neutral max-w-3xl dark:prose-invert">
